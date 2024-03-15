@@ -109,9 +109,10 @@
                         </div>
                         <div class="form-group">
                             <label>Salary</label>
-                            <input type="text" class="form-control form-control-rounded" placeholder="Salary" asp-for="Salary" required="required">
-
+                            <input type="text" class="form-control form-control-rounded" placeholder="Salary" asp-for="Salary" required="required" pattern="[0-9]*" minlength="2" maxlength="10" title="Please enter a valid salary (only digits allowed, minimum length: 2, maximum length: 10)" />
+                            <span asp-validation-for="Salary" class="text-danger"></span>
                         </div>
+
                        @*  <div class="form-group">
                             <label>ApplicationDeadline</label>
                             <input type="date" class="form-control form-control-rounded" placeholder="ApplicationDeadline" asp-for="ApplicationDeadline" required="required">
