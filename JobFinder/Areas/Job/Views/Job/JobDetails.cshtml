@@ -1,0 +1,69 @@
+﻿@using JobFinder.Areas.Job.Models;
+@using System.Data;
+@using System.Collections;
+@model JobFinder.Areas.Job.Models.JobModel;
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-11 m-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Job Details</div>
+                    <hr>
+                    <form>
+
+                          <div class="form-group row">
+                        <div class="col-sm-2">Company ID</div>
+                        <div class="col-sm-10 form-control form-control-rounded">@Model.CompanyID</div>
+                        </div> 
+                          <div class="form-group row">
+                        <div class="col-sm-2">Job Type</div>
+                        <div class="col-sm-10 form-control form-control-rounded">@Model.JobType</div>
+                        </div>   
+
+
+                        <div class="form-group row">
+                            <div class="col-sm-2">Location</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.Location</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">Requirements</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.Requirements</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">Salary</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.Salary</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">EmploymentType</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.EmploymentType</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">ExperienceLeval</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.ExperienceLeval</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">EducationLeval</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.EducationLeval</div>
+                        </div>
+                        
+
+
+
+                        <td>
+                            <a type="button" asp-area="Job" asp-controller="Job" asp-action="JobAddEdit" asp-route-JobID="@Model.JobID">
+                                <button type="button" class="btn btn-outline-primary">Edit</button>
+                            </a>
+
+                        </td>
+                        </tr>
+
+                        <a class="btn btn-outline-secondary" asp-area="Job" asp-controller="Job" asp-action="JobList">Back</a>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

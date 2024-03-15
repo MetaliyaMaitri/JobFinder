@@ -1,0 +1,131 @@
+﻿@using JobFinder.Areas.Job.Models;
+@using System.Data;
+@using System.Collections;
+
+@model JobFinder.Areas.Job.Models.JobModel;
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title" style="color: #4B49AC" ;>Job Form</div>
+                    <hr>
+                    <form method="post" asp-area="Job" asp-controller="Job" asp-action="SaveForAddEdit">
+                        <input type="hidden" asp-for="JobID" />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label>JobType</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="JobType" asp-for="JobType" required="required">
+                            <span asp-validation-for="JobType" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <select class="form-control" asp-for="CompanyID" asp-items="@(new SelectList(ViewBag.SetCompanyDropDownList,"CompanyID","CompanyName"))" style="color:black" required="required">
+                                <option value="">Select Company</option>
+                            </select>
+                        </div>
+                       
+
+                        
+                        
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="Location" asp-for="Location" required="required">
+                            <span asp-validation-for="Location" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Requirements</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="Requirements" asp-for="Requirements" required="required">
+                            <span asp-validation-for="Requirements" class="text-danger"></span>
+
+                        </div>
+                       
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row g-3">
+                                        <label>EmploymentType</label>
+                                        <span asp-validation-for="EmploymentType" class="text-danger"></span>
+                                        <div class="form-check">
+                                            <input class="form-check-input" style="margin-left: 10px;" type="radio" name="employmentType" id="fullTime" value="Full Time" asp-for="EmploymentType">
+                                            <label class="form-check-label" for="fullTime">Full Time</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" style="margin-left: 10px;" type="radio" name="employmentType" id="partTime" value="Part Time" asp-for="EmploymentType">
+                                            <label class="form-check-label" for="partTime">Part Time</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" style="margin-left: 10px;" type="radio" name="employmentType" id="contract" value="Contract" asp-for="EmploymentType">
+                                            <label class="form-check-label" for="contract">Contract</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                       
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <label>ExperienceLeval</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" style="margin-left: 10px;" type="radio" name="experienceLeval" id="beginner" value="beginner" asp-for="ExperienceLeval">
+                                        <label class="form-check-label" for="beginner">beginner</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" style="margin-left: 10px;" type="radio" name="experienceLeval" id="intermediate" value="intermediate" asp-for="ExperienceLeval">
+                                        <label class="form-check-label" for="intermediate">intermediate</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" style="margin-left: 10px;" type="radio" name="experienceLeval" id="advanced" value="advanced" asp-for="ExperienceLeval">
+                                        <label class="form-check-label" for="advanced">advanced</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <label>Education Level</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" style="margin-left: 10px;" type="radio" name="educationLeval" id="highschool" value="highschool" asp-for="EducationLeval">
+                                        <label class="form-check-label" for="highschool">Highschool</label>
+
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" style="margin-left: 10px;" type="radio" name="educationLeval" id="bachlors" value="bachlors" asp-for="EducationLeval">
+                                        <label class="form-check-label" for="bachlors">Bachlor`s</label>
+
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" style="margin-left: 10px;" type="radio" name="educationLeval" id="masters" value="masters" asp-for="EducationLeval">
+                                        <label class="form-check-label" for="masters">Master`s</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Salary</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="Salary" asp-for="Salary" required="required">
+
+                        </div>
+                       @*  <div class="form-group">
+                            <label>ApplicationDeadline</label>
+                            <input type="date" class="form-control form-control-rounded" placeholder="ApplicationDeadline" asp-for="ApplicationDeadline" required="required">
+
+                        </div> *@
+                        <div class="form-group">
+                            <input type="submit" class=" btn btn-outline-primary"></input>
+                            <a class="btn btn-outline-secondary" asp-area="Job" asp-controller="Job" asp-action="JobList">Back</a>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

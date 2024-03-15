@@ -1,0 +1,73 @@
+﻿@using System.Collections
+@{
+    Layout = "~/Areas/Layout/_AreaLayout.cshtml";
+}
+
+
+@model IEnumerable<JobFinder.Areas.User.Models.UserModel>;
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+
+
+
+            <h5 class="card-title">User</h5>
+            @*  <form method="post" asp-controller="Company" asp-action="SaveForAddEdit" asp-area="Company" class="d-flex w-80" role="search"> *@
+
+            @*  </form> *@
+            <div class="table-responsive">
+                <table class="table table-striped">
+
+                   @*  <li class="nav-link">
+                        <a class=" btn btn-outline-success" asp-area="State" asp-controller="State" asp-action="LOC_StateAddEdit">Add+</a>
+
+                    </li> *@
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">UserID</th>
+                           
+                            <th scope="col" class="text-center">UserName</th>
+                            <th scope="col" class="text-center">Password</th>
+                            <th scope="col" class="text-center">Email</th>
+                           
+
+
+                        </tr>
+                    </thead>
+                    @foreach (var row in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td class="text-center">@row.UserID </td>
+                                <td class="text-center">@row.UserName </td>
+                                <td class="text-center">@row.Password </td>
+                                <td class="text-center">@row.Email</td>
+                                
+
+
+
+
+                                @* <td>
+                                    <form method="post" asp-area="State" asp-controller="State" asp-action="StateDetails" asp-route-StateID="@row.StateID">
+
+                                        <button class="btn btn-outline-success"><i class="ti-file btn-icon-append"></i></button>
+
+                                    </form>
+                                </td>
+                                <td>
+                                    <a type="button" asp-area="State" asp-controller="State" asp-action="LOC_StateDelete" asp-route-StateID="@row.StateID" class="btn btn-outline-danger"><i class="ti-trash btn-icon-append"></i></a>
+
+                                </td> *@
+
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+

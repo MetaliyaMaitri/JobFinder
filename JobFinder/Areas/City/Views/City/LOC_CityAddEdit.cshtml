@@ -1,0 +1,57 @@
+﻿@using JobFinder.Areas.City.Models;
+@using System.Data;
+@using System.Collections;
+
+@model JobFinder.Areas.City.Models.CityModel;
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title" style="color: #4B49AC" ;>City Form</div>
+                    <hr>
+                    <form method="post" asp-area="City" asp-controller="City" asp-action="SaveForAddEdit">
+                        <input type="hidden" asp-for="CityID" />
+                        <div asp-validation-for="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label>Country Name</label>
+                            
+                            <select class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.SetCountryDropDownList,"CountryID","CountryName"))" required="required" style="color:black">
+                                <option value="">Select Country</option>
+                            </select>
+                        </div>
+                        @* <div class="form-group">
+                            <label>State ID</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="StateID" asp-for="StateID">
+                        </div> *@
+                        <div class="form-group">
+                            <label >State Name</label>
+                            <select class="form-control" asp-for="StateID" asp-items="@(new SelectList(ViewBag.SetStateDropDownList,"StateID","StateName"))" required="required" style="color:black">
+                                <option value="">Select State</option>
+                            </select>
+                            
+                        </div>
+                        <div class="form-group">
+
+                            <label>City Name</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="CityName" asp-for="CityName" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>CityCode</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="CityCode" asp-for="CityCode" required="required">
+                        </div>
+
+                        <div class="form-group">
+                           
+                            <input type="submit" class=" btn btn-outline-primary"></input>
+                            <a class="btn btn-outline-secondary" asp-area="City" asp-controller="City" asp-action="CityList">Back</a>
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

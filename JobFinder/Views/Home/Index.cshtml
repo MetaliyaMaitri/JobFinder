@@ -1,0 +1,142 @@
+﻿ <!-- HOME -->
+<section class="home-section section-hero overlay bg-image" style="background-image: url('../../assets/images/hero_1.jpg');" id="home-section">
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12">
+                <div class="mb-5 text-center">
+                    <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>
+                </div>
+                <form method="post" class="search-jobs-form" asp-controller="Home" asp-action="SearchCompany">
+                    <div class="row mb-5">
+                        <div asp-validation-for="All" class="text-danger"></div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+
+                            <input type="text" name="CompanyName" class="form-control dt-input dt-full-name" data-column="1" placeholder="CompanyName" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            <div class="form-group">
+
+                                <select class="form-control" asp-items="@(new SelectList(ViewBag.SetCityDropDownList,"CityID","CityName"))">
+                                    <option value="">Select City</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        @*  <div class="col-12 col-sm-6 col-lg-4">
+
+                        <input type="text" name="CityName" class="form-control dt-input dt-full-name" data-column="1" placeholder="CityName" data-column-index="0" fdprocessedid="2u7jd">
+                        </div> *@
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span class="icon-search icon mr-2"></span>Search Job</button>
+                        </div>
+
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a href="#next" class="scroll-button smoothscroll">
+        <span class=" icon-keyboard_arrow_down"></span>
+    </a>
+
+</section>
+
+<!--for Count-->
+<section class="py-5 bg-image overlay-primary fixed overlay" id="next" style="background-image: url('../../assets/images/hero_1.jpg');">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="section-title mb-2 text-white">JobBoard Site Stats</h2>
+                <p class="lead text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita unde officiis recusandae sequi excepturi corrupti.</p>
+            </div>
+        </div>
+        <div class="row pb-0 block__19738 section-counter">
+
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <span class="number" data-number="4">@ViewBag.CompanyCount</strong>
+                </div>
+                <span class="caption">Company</span>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="4">@ViewBag.JobCount</strong>
+                </div>
+                <span class="caption">Jobs Count</span>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="3">@ViewBag.CityCount</strong>
+                </div>
+                <span class="caption">Jobs Filled</span>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="10">@ViewBag.UserCount</strong>
+                </div>
+                <span class="caption">Companies</span>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</section>
+
+<!-- For company list-->
+<section class="site-section">
+    <div class="container">
+
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="section-title mb-2">Job Listed</h2>
+
+            </div>
+        </div>
+
+        @foreach (var row in ViewBag.CompanyList)
+        {
+            <ul class="job-listings mb-5">
+                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                    <a href="job-single.html"></a>
+                    <div class="job-listing-logo">
+
+                        <img src="~/Company/@row.ImageUrl" alt="Company Image" class="img-fluid">
+                    </div>
+
+                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                            <h2>@row.CompanyName</h2>
+
+                            <h5>@row.CityName</h5>
+                            <h5>@row.ContactEmail</h5>
+                            <strong>@row.ContactPhone</strong>
+
+                        </div>
+
+
+                    </div>
+
+                </li>
+            </ul>
+
+        }
+
+
+
+    </div>
+</section>
+
+

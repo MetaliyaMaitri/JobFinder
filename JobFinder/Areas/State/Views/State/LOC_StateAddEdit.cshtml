@@ -1,0 +1,50 @@
+﻿@using JobFinder.Areas.State.Models;
+@using System.Data;
+@using System.Collections;
+
+@model JobFinder.Areas.State.Models.StateModel;
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title" style="color: #4B49AC" ;>State Form</div>
+                    <hr>
+                    <form method="post" asp-area="State" asp-controller="State" asp-action="SaveForAddEdit">
+                        <input type="hidden" asp-for="StateID" />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        @*  <div class="form-group">
+                            <label>Country ID</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="CountryID" asp-for="CountryID">
+                        </div>  *@
+                        <div class="form-group">
+                            <label>Country Name</label>
+                            <select class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.SetCountryDropDownList,"CountryID","CountryName"))" required="required" style="color:black">
+                                <option value="">Select State</option>
+                            </select>
+                         
+                        </div>
+                      
+                        <div class="form-group">
+                            <label>State Name</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="StateName" asp-for="StateName" required="required">
+                            <span asp-validation-for="StateName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>StateCode</label>
+                            <input type="text" class="form-control form-control-rounded" placeholder="StateCode" asp-for="StateCode" required="required">
+                            <span asp-validation-for="StateCode" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class=" btn btn-outline-primary"></input>
+                            <a class="btn btn-outline-secondary" asp-area="State" asp-controller="State" asp-action="StateList">Back</a>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

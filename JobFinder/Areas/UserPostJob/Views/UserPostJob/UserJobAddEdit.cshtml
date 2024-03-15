@@ -1,0 +1,152 @@
+﻿@{
+    Layout = "_Layout";
+}
+@using JobFinder.Areas.UserPostJob.Models;
+@using System.Data;
+@using System.Collections;
+
+@model JobFinder.Areas.UserPostJob.Models.UserJobModel;
+
+<!-- HOME -->
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('../../assets/images/hero_1.jpg');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Post A Job</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                    <a href="#">Job</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Post a Job</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    <div class="container">
+
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h2>Post A Job</h2>
+                    </div>
+                </div>
+            </div>
+         @*    <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-area="UserPostJob" asp-controller="UserPostJob" asp-action="UserJobList" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
+                    </div>
+                   
+                </div>
+            </div> *@
+        </div>
+        <div class="row mb-5">
+            <div class="col-lg-12">
+
+                <form class="p-4 p-md-5 border rounded" method="post" asp-area="UserPostJob" asp-controller="UserPostJob" asp-action="SaveForAddEdit">
+                    <h3 class="text-black mb-5 border-bottom pb-2">Job Details</h3>
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label for="job-type">Job Type</label>
+                        <input type="text" class="form-control form-control-rounded"asp-for="JobType" id="job-type" placeholder="Job Type" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="Companyname">Company Name</label>
+                        <select class="form-control" asp-for="CompanyID" asp-items="@(new SelectList(ViewBag.SetCompanyDropDownList,"CompanyID","CompanyName"))" style="color:black" required="required">
+                            <option value="">Select Company</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-location">Location</label>
+                        <input type="text" class="form-control form-control-rounded" asp-for="Location" id="job-location" placeholder="e.g. New York">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job-requirements">Requirements</label>
+                        <input type="text" class="form-control form-control-rounded" id="job-requirements" asp-for="Requirements" placeholder="Requirements" required="required">
+                    </div>
+
+                   
+                    <div class="form-group">
+                       
+                                <label>EmploymentType</label>
+                                <span asp-validation-for="EmploymentType" class="text-danger"></span>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="employmentType" id="fullTime" value="Full Time" asp-for="EmploymentType">
+                                    <label class="form-check-label" for="fullTime">Full Time</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input"  type="radio" name="employmentType" id="partTime" value="Part Time" asp-for="EmploymentType">
+                                    <label class="form-check-label" for="partTime">Part Time</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="employmentType" id="contract" value="Contract" asp-for="EmploymentType">
+                                    <label class="form-check-label" for="contract">Contract</label>
+                                </div>
+                        
+                    </div>
+                    
+
+                    <div class="form-group">
+                      
+                                <label>ExperienceLeval</label>
+                                <div class="form-check">
+                                    <input class="form-check-input"  type="radio" name="experienceLeval" id="beginner" value="beginner" asp-for="ExperienceLeval">
+                                    <label class="form-check-label" for="beginner">beginner</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input"  type="radio" name="experienceLeval" id="intermediate" value="intermediate" asp-for="ExperienceLeval">
+                                    <label class="form-check-label" for="intermediate">intermediate</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input"  type="radio" name="experienceLeval" id="advanced" value="advanced" asp-for="ExperienceLeval">
+                                    <label class="form-check-label" for="advanced">advanced</label>
+                                </div>
+                         
+                    </div>
+                   
+                    <div class="form-group">
+                        
+                                <label>Education Level</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="educationLeval" id="highschool" value="highschool" asp-for="EducationLeval">
+                                    <label class="form-check-label" for="highschool">Highschool</label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input"  type="radio" name="educationLeval" id="bachlors" value="bachlors" asp-for="EducationLeval">
+                                    <label class="form-check-label" for="bachlors">Bachlor`s</label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input"  type="radio" name="educationLeval" id="masters" value="masters" asp-for="EducationLeval">
+                                    <label class="form-check-label" for="masters">Master`s</label>
+
+                                </div>
+                          
+                    </div>
+                    <div class="form-group">
+                        <label for="salary">Salary</label>
+                        <input type="text" class="form-control form-control-rounded" asp-for="Salary" id="salary" placeholder="Salary" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-outline-success" value="Save">
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+      
+    </div>
+</section>
+
+
+

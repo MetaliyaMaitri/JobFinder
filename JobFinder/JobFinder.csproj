@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\Login\.vs\VSWorkspaceState.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Company\Data\" />
+    <Folder Include="Areas\Dashboard\Data\" />
+    <Folder Include="Areas\Dashboard\Models\" />
+    <Folder Include="Areas\Job\Data\" />
+    <Folder Include="Areas\City\Data\" />
+    <Folder Include="Areas\Country\Data\" />
+    <Folder Include="Areas\Login\Data\" />
+    <Folder Include="Areas\State\Data\" />
+    <Folder Include="Areas\UserContact\Data\" />
+    <Folder Include="Areas\UserContact\Models\" />
+    <Folder Include="Areas\UserLogin\Data\" />
+    <Folder Include="Areas\UserLogin\Models\" />
+    <Folder Include="Areas\UserLogin\Views\" />
+    <Folder Include="Areas\UserPostJob\Data\" />
+    <Folder Include="Areas\User\Data\" />
+    <Folder Include="Areas\User_Index\Data\" />
+    <Folder Include="wwwroot\Login\.vs\Login_v2\v17\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\bs4\.DS_Store" />
+    <None Include="wwwroot\assets\fonts\.DS_Store" />
+    <None Include="wwwroot\assets\fonts\line-icons\.DS_Store" />
+    <None Include="wwwroot\assets\scss\.DS_Store" />
+    <None Include="wwwroot\Login\.vs\slnx.sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chart.js" Version="3.7.1" />
+    <PackageReference Include="ClosedXML" Version="0.102.2" />
+    <PackageReference Include="EnterpriseLibrary.Data.NetCore" Version="6.3.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+</Project>

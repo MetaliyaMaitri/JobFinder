@@ -1,0 +1,158 @@
+﻿@using System.Collections
+@{
+    Layout = "~/Areas/Layout/_AreaLayout.cshtml";
+}
+
+
+@model IEnumerable<JobFinder.Areas.City.Models.CityModel>;
+@if (TempData["message"] != null)
+{
+    if (TempData["message"].ToString().Contains("Successfully"))
+    {
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="bi bi-check-circle me-1" onclick="this.parentElement.style.display='none';">&times;</span>
+            @TempData["message"]
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">City Not Deleted</h4>
+            <p>@TempData["message"]</p>
+            <hr>
+            <p class="mb-0">Somthing Went Wrong!</p>
+            @*  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> *@
+            <span class="bi bi-check-circle me-1" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+    }
+
+}
+
+
+<div class="card">
+    <h4 class="card-header" style="background: #4B49AC;color: white;"> Filter</h4>
+    <!--Search Form -->
+    <div class="card-body">
+
+        <form class="" role="form" asp-action="SearchCity" asp-controller="City" asp-area="City">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">Country Name:</label>
+                            <input type="text" name="CountryName" class="form-control dt-input dt-full-name" data-column="1" placeholder="CountryName" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">State Name:</label>
+                            <input type="text" name="StateName" class="form-control dt-input dt-full-name" data-column="1" placeholder="StateName" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">City Name:</label>
+                            <input type="text" name="CityName" class="form-control dt-input dt-full-name" data-column="1" placeholder="CityName" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">City Code:</label>
+                            <input type="text" name="CityCode" class="form-control dt-input dt-full-name" data-column="1" placeholder="CityCode" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br />
+            <button class="m-3 btn btn-outline-success" type="submit">Search</button>
+            <button class="m-3 btn btn-outline-dark" type="submit" asp-area="City" asp-action="Cancel" asp-controller="City">Clear</button>
+        </form>
+    </div>
+</div>
+<br />
+<br />
+
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+
+        <h5 class="card-title" style="color : #4B49AC">CityList</h5>
+        <a class=" btn btn-outline-primary" asp-area="City" asp-controller="City" asp-action="LOC_CityAddEdit">+Add City</a>
+    </div>
+
+    <div class="card-datatable table-responsive">
+        <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="dt-advanced-search table border-top dataTable dtr-column" id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info" style="width: 1210px;">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">City</th>
+                                <th scope="col" class="text-center">CountryName</th>
+                                <th scope="col" class="text-center">StateName</th>
+                                <th scope="col" class="text-center">CityName</th>
+                                <th scope="col" class="text-center">CityCode</th>
+                                <th scope="col" class="text-center">Created</th>
+                                <th scope="col" class="text-center">Modified</th>
+                                <th scope="col" class="text-center">Actions</th>
+                        </thead>
+                        @foreach (var row in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">@row.CityID </td>
+                                    <td class="text-center">@row.CountryName </td>
+                                    <td class="text-center">@row.StateName</td>
+                                    <td class="text-center">@row.CityName</td>
+                                    <td class="text-center">@row.CityCode</td>
+                                    <td class="text-center">@row.CreationDate</td>
+                                    <td class="text-center">@row.Modified</td>
+
+                                    <td>
+                                        <a class="btn btn-outline-primary" asp-area="City" asp-controller="City" asp-action="LOC_CityAddEdit" asp-route-CityID="@row.CityID"><i class="ti-pencil btn-icon-append"></i></a>
+                                        <a type="button" onclick="return confirm('Are you sure you want to delete record?')" asp-area="City" asp-controller="City" asp-action="LOC_CityDelete" asp-route-CityID="@row.CityID" class="btn btn-outline-danger"><i class="ti-trash btn-icon-append"></i></a>
+
+                                    </td>
+                                   </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+@* Multiple Delete *@
+<script>
+    $(document).ready(function () {
+        console.log("Hello");
+        $("#deleteSelectedBtn").on("click", function (e) {
+            var confirmation = confirm("Are you sure?")
+            if (confirmation) {
+
+                e.preventDefault();
+                var data = [];
+                $("input[name='chkDeleteName']:checked").each(function () {
+                    data.push($(this).val());
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Delete")",
+                    data: { id: data },
+                    traditional: true,
+                    success: function (result) {
+                        //alert("done");
+                        alert("Delete Success")
+                        location.reload();
+                    }
+                })
+            }
+            else
+                alert("Delete Canceled")
+        })
+    })
+</script> 

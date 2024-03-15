@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+        <!-- HOME -->
+        <section class="section-hero overlay inner-page bg-image" style="background-image: url('../../assets/images/hero_1.jpg);" id="home-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1 class="text-white font-weight-bold">Job Listed</h1>
+                        <div class="custom-breadcrumbs">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="site-section" id="next">
+            <div class="container">
+                @foreach (var row in Model)
+                {
+                    <ul class="job-listings mb-5">
+                        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                            <a href="job-single.html"></a>
+                            <div class="job-listing-logo">
+
+                                <img src="~/Company/@row.ImageUrl" alt="Company Image" class="img-fluid">
+                            </div>
+
+                            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                    <h2>@row.CompanyName</h2>
+                                    <h5>@row.CityName</h5>
+                                    <h5>@row.ContactEmail</h5>
+                                    <strong>@row.ContactPhone</strong>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+                    </ul>
+                }
+                <div class="row pagination-wrap">
+                    <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+                        <span>Showing 1-7 Of 22,392 Jobs</span>
+                    </div>
+                    <div class="col-md-6 text-center text-md-right">
+                        <div class="custom-pagination ml-auto">
+                            <a href="#" class="prev">Prev</a>
+                            <div class="d-inline-block">
+                                <a href="#" class="active">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#">4</a>
+                            </div>
+                            <a href="#" class="next">Next</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="bg-light pt-5 testimony-full">
+
+            <div class="owl-carousel single-carousel">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 align-self-center text-center text-lg-left">
+                            <blockquote>
+                                <p>&ldquo;Soluta quasi cum delectus eum facilis recusandae nesciunt molestias accusantium libero dolores repellat id in dolorem laborum ad modi qui at quas dolorum voluptatem voluptatum repudiandae.&rdquo;</p>
+                                <p><cite> &mdash; Corey Woods, Dribbble</cite></p>
+                            </blockquote>
+                        </div>
+                        <div class="col-lg-6 align-self-end text-center text-lg-right">
+                            <img src="~/assets/images/person_transparent_2.png" alt="Image" class="img-fluid mb-0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 align-self-center text-center text-lg-left">
+                            <blockquote>
+                                <p>&ldquo;Soluta quasi cum delectus eum facilis recusandae nesciunt molestias accusantium libero dolores repellat id in dolorem laborum ad modi qui at quas dolorum voluptatem voluptatum repudiandae.&rdquo;</p>
+                                <p><cite> &mdash; Chris Peters, Google</cite></p>
+                            </blockquote>
+                        </div>
+                        <div class="col-lg-6 align-self-end text-center text-lg-right">
+                            <img src="~/assets/images/person_transparent.png" alt="Image" class="img-fluid mb-0">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+       
+
+       
+
+
+
+   

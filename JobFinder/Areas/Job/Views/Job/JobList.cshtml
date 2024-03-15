@@ -1,0 +1,180 @@
+﻿@using System.Collections
+@{
+    Layout = "~/Areas/Layout/_AreaLayout.cshtml";
+}
+
+
+@model IEnumerable<JobFinder.Areas.Job.Models.JobModel>;
+@if (TempData["message"] != null)
+{
+    if (TempData["message"].ToString().Contains("Successfully"))
+    {
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="bi bi-check-circle me-1" onclick="this.parentElement.style.display='none';">&times;</span>
+            @TempData["message"]
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Country Not Deleted</h4>
+            <p>@TempData["message"]</p>
+            <hr>
+            <p class="mb-0">Somthing Went Wrong!</p>
+            @*  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> *@
+            <span class="bi bi-check-circle me-1" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+    }
+
+}
+
+
+<div class="card">
+    <h4 class="card-header" style="background: #4B49AC;color: white;"> Filter</h4>
+    <!--Search Form -->
+    <div class="card-body">
+
+        <form class="" role="form" asp-action="SearchJob" asp-controller="Job" asp-area="Job">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">Job Type:</label>
+                            <input type="text" name="JobType" class="form-control dt-input dt-full-name" data-column="1" placeholder="JobType" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">CompanyName:</label>
+                            <input type="text" name="CompanyName" class="form-control dt-input dt-full-name" data-column="1" placeholder="CompanyName" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">Location:</label>
+                            <input type="text" name="Location" class="form-control dt-input dt-full-name" data-column="1" placeholder="Location" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">Salary:</label>
+                            <input type="text" name="Salary" class="form-control dt-input dt-full-name" data-column="1" placeholder="Salary" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br />
+            <td>
+                <button class="m-3 btn btn-outline-success" type="submit">Search</button>
+                <button class="m-3 btn btn-outline-dark" type="submit" asp-area="Job" asp-controller="Job" asp-action="Cancel">Clear</button>
+            </td>
+           
+        </form>
+    </div>
+</div>
+<br />
+<br />
+
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+
+        <h5 class="card-title" style="color : #4B49AC">JobList</h5>
+        <form>
+            <a class=" btn btn-outline-primary" asp-area="Job" asp-controller="Job" asp-action="JobAddEdit">+Add Job</a>
+           
+            <button id="deleteSelectedBtn" class="btn btn-outline-danger">Delete Selected</button>
+        </form>
+
+    </div>
+
+    <div class="card-datatable table-responsive">
+        <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="dt-advanced-search table border-top dataTable dtr-column" id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info" style="width: 1210px;">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">JobID</th>
+                                <th scope="col" class="text-center">JobType</th>
+                                <th scope="col" class="text-center">CompanyName</th>
+                                <th scope="col" class="text-center">Location</th>
+                                <th scope="col" class="text-center">Requirements</th>
+                                <th scope="col" class="text-center">EmploymentType</th>
+                                <th scope="col" class="text-center">ExperienceLeval</th>
+                                <th scope="col" class="text-center">EducationLeval</th>
+                                <th scope="col" class="text-center">Salary</th>
+                                <th scope="col" class="text-center">Actions</th>
+                             
+                                
+                            </tr>
+                        </thead>
+                        @foreach (var row in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"><input type="checkbox" class="chkDelete" name="chkDeleteName" value="@row.JobID" /></td>
+
+                                    <td class="text-center">@row.JobID </td>
+
+                                    <td class="text-center">@row.JobType </td>
+                                    <td class="text-center">@row.CompanyName</td>
+                                    <td class="text-center">@row.Location</td>
+                                    <td class="text-center">@row.Requirements</td>
+                                    <td class="text-center">@row.EmploymentType</td>
+                                    <td class="text-center">@row.ExperienceLeval</td>
+                                    <td class="text-center">@row.EducationLeval</td>
+                                    <td class="text-center">@row.Salary</td>
+
+                                    <td>
+                                        <a class="btn btn-outline-primary" asp-area="Job" asp-controller="Job" asp-action="JobAddEdit" asp-route-JobID="@row.JobID"><i class="ti-pencil btn-icon-append"></i></a>
+                                        <a type="button" onclick="return confirm('Are you sure you want to delete record?')" asp-area="Job" asp-controller="Job" asp-action="JobDelete" asp-route-JobID="@row.JobID" class="btn btn-outline-danger"><i class="ti-trash btn-icon-append"></i></a>
+
+                                    </td>
+
+                                    
+
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+@* Multiple Delete *@
+<script>
+    $(document).ready(function () {
+        console.log("Hello");
+        $("#deleteSelectedBtn").on("click", function (e) {
+            var confirmation = confirm("Are you sure?")
+            if (confirmation) {
+
+                e.preventDefault();
+                var data = [];
+                $("input[name='chkDeleteName']:checked").each(function () {
+                    data.push($(this).val());
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Delete")",
+                    data: { id: data },
+                    traditional: true,
+                    success: function (result) {
+                        //alert("done");
+                        alert("Delete Success")
+                        location.reload();
+                    }
+                })
+            }
+            else
+                alert("Delete Canceled")
+        })
+    })
+</script> 

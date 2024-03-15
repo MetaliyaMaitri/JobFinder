@@ -1,0 +1,52 @@
+﻿@using JobFinder.Areas.State.Models;
+@using System.Data;
+@using System.Collections;
+@model JobFinder.Areas.State.Models.StateModel;
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-11 m-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">State Details</div>
+                    <hr>
+                    <form>
+
+                       @*  <div class="form-group row">
+                            <div class="col-sm-2">Country ID</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.CountryID</div>
+                        </div> *@
+                        @*  <div class="form-group row">
+                            <div class="col-sm-2">Country Name</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.CountryName</div>
+                        </div>   *@
+
+
+                        <div class="form-group row">
+                            <div class="col-sm-2">State Name</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.StateName</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">State Code</div>
+                            <div class="col-sm-10 form-control form-control-rounded">@Model.StateCode</div>
+                        </div>
+
+
+
+                        <td>
+                            <a type="button" asp-area="State" asp-controller="State" asp-action="LOC_StateAddEdit" asp-route-StateID="@Model.StateID">
+                                <button type="button" class="btn btn-outline-primary">Edit</button>
+                            </a>
+
+                        </td>
+                      
+
+                        <a class="btn btn-outline-secondary" asp-area="State" asp-controller="State" asp-action="StateList">Back</a>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,266 @@
+﻿@using System.Collections
+@{
+    Layout = "~/Areas/Layout/_AreaLayout.cshtml";
+}
+
+
+@model IEnumerable<JobFinder.Areas.Company.Models.CompanyModel>;
+@if (TempData["message"] != null)
+{
+    if (TempData["message"].ToString().Contains("Successfully"))
+    {
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="bi bi-check-circle me-1" onclick="this.parentElement.style.display='none';">&times;</span>
+            @TempData["message"]
+
+        </div>
+
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Country Not Deleted</h4>
+            <p>@TempData["message"]</p>
+            <hr>
+            <p class="mb-0">Somthing Went Wrong!</p>
+          
+            <span class="bi bi-check-circle me-1" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+    }
+
+}
+
+<div class="card">
+    <h4 class="card-header" style="background: #4B49AC;color: white;">Filter</h4>
+    <!--Search Form -->
+    <div class="card-body">
+        <form class="" role="form" asp-action="SearchCompany" asp-controller="Company" asp-area="Company">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">Company Name:</label>
+                            <input type="text" name="CompanyName" class="form-control dt-input dt-full-name" data-column="1" placeholder="CompanyName" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <label class="form-label">City Name:</label>
+                            <input type="text" name="CityName" class="form-control dt-input dt-full-name" data-column="1" placeholder="CityName" data-column-index="0" fdprocessedid="2u7jd">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="m-3 btn btn-outline-success" type="submit" style="margin-right: ;">Search</button>
+            <button class="m-3 btn btn-outline-dark" type="submit" asp-area="Company" asp-controller="Company" asp-action="Cancel" style="margin-left: 0;">Clear</button>
+        </form>
+    </div>
+</div>
+<br />
+<br />
+<div class="container mt-2">
+    <div class="card-header d-flex justify-content-between">
+        <h5 class="card-title" style="color: #4B49AC; font-size:larger">Company</h5>
+       
+        <form>
+            <a class="btn btn-outline-primary" asp-area="Company" asp-controller="Company" asp-action="AddEditCompany">+Add Company</a>
+            <a class=" btn btn-outline-success" asp-area="Company" asp-controller="Company" asp-action="ExportCompanyToExcel">Export Excel</a>
+            <button id="deleteSelectedBtn" class="btn btn-outline-danger">Delete Selected</button>
+        </form>
+    </div>
+
+    <!-- Cards -->
+    <div class="row">
+        @foreach (var row in Model)
+        {
+           
+            <div class="col-md-4 item">
+                <div class="card item-card card-block h-100">
+                  
+                    <img src="~/Company/@row.ImageUrl" alt="Company Image" class="card-img-top">
+
+                    <div class="card-body">
+                    
+                            <p><input type="checkbox" class="chkDelete" name="chkDeleteName" value="@row.CompanyID" /></p>
+                            <h5 class="card-title mt-3 mb-3">@row.CompanyName</h5>
+                 
+                        
+                        <p class="card-text">@row.Description</p>
+                        <p class="card-text">@row.CityName</p>
+                          <p class="card-text">@row.Size</p>
+                        <p class="card-text">@row.ContactPhone</p>
+                        <p class="card-text">@row.ContactEmail</p>
+                    </div>
+                    <div class="card-footer">
+                        <form method="post" asp-area="Company" asp-controller="Company" asp-action="AddEditCompany" asp-route-CompanyID="@row.CompanyID">
+                            <button type="submit" class="btn btn-outline-primary"><i class="ti-pencil btn-icon-append"></i> Edit</button>
+                            <a onclick="return confirm('Are you sure you want to delete record?')" asp-area="Company" asp-controller="Company" asp-action="DeleteCompany" asp-route-CompanyID="@row.CompanyID" class="btn btn-outline-danger"><i class="ti-trash btn-icon-append"></i> Delete</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0;
+        padding: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .btn-outline-primary:hover, .btn-outline-primary:focus {
+        color: #fff;
+       
+    }
+
+    .btn-outline-danger:hover, .btn-outline-danger:focus {
+        color: #fff;
+       
+    }
+
+    .item-card {
+        border: 1px solid #ced4da;
+        border-radius: 10px;
+        transition: box-shadow 0.3s ease, transform 0.3s ease; /* Added transform transition */
+    }
+
+        .item-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increased shadow intensity */
+            transform: scale(1.02); /* Slight scale increase */
+        }
+
+    .card-footer {
+        background-color:#e0e0e0;
+        border-top: 1px solid #e0e0e0;
+        padding: 0.75rem 1.25rem;
+    }
+
+        .card-footer button, .card-footer a {
+            margin-right: 5px;
+        }
+
+    .card-title {
+        font-weight: bold;
+    }
+
+    .card-text {
+        margin-bottom: 0.5rem;
+    }
+
+    .item {
+        margin-bottom: 20px;
+    }
+
+</style>
+
+@* 
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+
+      
+        <h5 class="card-title" style="color: #4B49AC;">CompanyList</h5>
+
+        <form>
+            <a class="btn btn-outline-primary" asp-area="Company" asp-controller="Company" asp-action="AddEditCompany">AddCompany+</a>
+            <a class=" btn btn-outline-success" asp-area="Company" asp-controller="Company" asp-action="ExportCompanyToExcel">Export Excel</a>
+            <button id="deleteSelectedBtn" class="btn btn-outline-danger">Delete Selected</button>
+        </form>
+    </div>
+
+    <div class="card-datatable table-responsive">
+        <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper dt-bootstrap5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="dt-advanced-search table border-top dataTable dtr-column" id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info" style="width: 1210px;">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">CompanyID</th>
+                                <th scope="col" class="text-center">CompanyName</th>
+                                <th scope="col" class="text-center">Description</th>
+                                <th scope="col" class="text-center">CityName</th>
+                             
+                                <th scope="col" class="text-center">Image</th>
+                                <th scope="col" class="text-center">Size</th>
+                                <th scope="col" class="text-center">ContactPhone</th>
+                                <th scope="col" class="text-center">ContactEmail</th>
+                                <th scope="col" class="text-center">Actions</th>
+
+                            </tr>
+                        </thead>
+                        @foreach (var row in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">@row.CompanyID </td>
+
+                                    <td class="text-center">@row.CompanyName </td>
+                                    <td class="text-center">@row.Description</td>
+                                    <td class="text-center">@row.CityName</td>
+                               
+                                    <td class="text-center"> <img src="~/Company/@row.ImageUrl" alt="Company Image" class="card-img-top"></td>
+                                    <td class="text-center">@row.Size</td>
+                                   
+                                    <td class="text-center">@row.ContactPhone</td>
+                                    <td class="text-center">@row.ContactEmail</td>
+                                    <td>
+                                        <a class="btn btn-outline-primary" asp-area="Company" asp-controller="Company" asp-action="AddEditCompany" asp-route-CompanyID="@row.CompanyID"><i class="ti-pencil btn-icon-append"></i></a>
+                                        <a type="button" onclick="return confirm('Are you sure you want to delete record?')" asp-area="Company" asp-controller="Company" asp-action="DeleteCompany" asp-route-CountryID="@row.CompanyID" class="btn btn-outline-danger"><i class="ti-trash btn-icon-append"></i></a>
+
+                                    </td>
+                                  
+                                   
+                                   
+
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div> *@
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+@* Multiple Delete *@
+<script>
+    $(document).ready(function () {
+        console.log("Hello");
+        $("#deleteSelectedBtn").on("click", function (e) {
+            var confirmation = confirm("Are you sure?")
+            if (confirmation) {
+
+                e.preventDefault();
+                var data = [];
+                $("input[name='chkDeleteName']:checked").each(function () {
+                    data.push($(this).val());
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Delete")",
+                    data: { id: data },
+                    traditional: true,
+                    success: function (result) {
+                        //alert("done");
+                        alert("Delete Success")
+                        location.reload();
+                    }
+                })
+            }
+            else
+                alert("Delete Canceled")
+        })
+    })
+</script> 
