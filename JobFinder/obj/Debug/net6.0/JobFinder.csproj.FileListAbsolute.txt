@@ -249,3 +249,4 @@ D:\SEM6\JobFinder\JobFinder\bin\Debug\net6.0\Irony.dll
 D:\SEM6\JobFinder\JobFinder\bin\Debug\net6.0\SixLabors.Fonts.dll
 D:\SEM6\JobFinder\JobFinder\bin\Debug\net6.0\System.IO.Packaging.dll
 D:\SEM6\JobFinder\JobFinder\bin\Debug\net6.0\XLParser.dll
+D:\SEM6\JobFinder\JobFinder\obj\Debug\net6.0\JobFinder.sourcelink.json

@@ -23,6 +23,7 @@ namespace JobFinder.Areas.User_Index.Controllers
 
         public IActionResult Index(int StateID)
         {
+           
             SetCityDropDownList();
             if (StateID == 0 || StateID == null)
             {
