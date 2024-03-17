@@ -74,7 +74,11 @@
     <div class="card-header d-flex justify-content-between">
 
         <h5 class="card-title" style="color : #4B49AC">CityList</h5>
-        <a class=" btn btn-outline-primary" asp-area="City" asp-controller="City" asp-action="LOC_CityAddEdit">+Add City</a>
+        <form>
+            <a class=" btn btn-outline-primary" asp-area="City" asp-controller="City" asp-action="LOC_CityAddEdit">+Add City</a>
+            <a class=" btn btn-outline-success" asp-area="City" asp-controller="City" asp-action="ExportCityToExcel">Export Excel</a>
+            <button id="deleteSelectedBtn" class="btn btn-outline-danger">Delete Selected</button>
+        </form>
     </div>
 
     <div class="card-datatable table-responsive">
@@ -84,6 +88,7 @@
                     <table class="dt-advanced-search table border-top dataTable dtr-column" id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info" style="width: 1210px;">
                         <thead>
                             <tr>
+                                <th scope="col" class="text-center">Select</th>
                                 <th scope="col" class="text-center">City</th>
                                 <th scope="col" class="text-center">CountryName</th>
                                 <th scope="col" class="text-center">StateName</th>
@@ -97,6 +102,7 @@
                         {
                             <tbody>
                                 <tr>
+                                    <td class="text-center"><input type="checkbox" class="chkDelete" name="chkDeleteName" value="@row.CityID" /></td>
                                     <td class="text-center">@row.CityID </td>
                                     <td class="text-center">@row.CountryName </td>
                                     <td class="text-center">@row.StateName</td>

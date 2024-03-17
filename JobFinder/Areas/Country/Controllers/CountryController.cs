@@ -1,18 +1,13 @@
 ﻿using ClosedXML.Excel;
-using JobFinder.Areas.Company.Models;
 using JobFinder.Areas.Country.Models;
 
 using JobFinder.DAL;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using System.Diagnostics.Metrics;
-using System.Reflection;
 
 namespace JobFinder.Areas.Country.Controllers
 {
@@ -30,7 +25,7 @@ namespace JobFinder.Areas.Country.Controllers
 
         #endregion
 
-        
+
         #region Selectallfor excel
         public List<CountryModel> GetCountryModels()
         {
@@ -53,7 +48,7 @@ namespace JobFinder.Areas.Country.Controllers
                         Created = Convert.ToDateTime(reader["Created"]),
                         Modified = Convert.ToDateTime(reader["Modified"]),
 
-                        
+
 
                     };
                     countryModels.Add(countryModel);
@@ -102,11 +97,11 @@ namespace JobFinder.Areas.Country.Controllers
         }
         #endregion
 
-      
+
         [HttpPost]
-       
+
         #region Multiple Delete
-            public ActionResult Delete(int[] id)
+        public ActionResult Delete(int[] id)
         {
 
             foreach (var item in id)
@@ -128,7 +123,7 @@ namespace JobFinder.Areas.Country.Controllers
 
         #endregion
 
-       
+
 
         #region SelectAll
 
@@ -179,8 +174,8 @@ namespace JobFinder.Areas.Country.Controllers
             catch (Exception ex)
             {
 
-                return null ;
-               
+                return null;
+
             }
         }
         #endregion
@@ -194,6 +189,7 @@ namespace JobFinder.Areas.Country.Controllers
             return RedirectToAction("CountryList");
         }
         #endregion
+
         #region #Delete
         public IActionResult Delete(int CountryID)
         {
@@ -227,33 +223,33 @@ namespace JobFinder.Areas.Country.Controllers
 
             //if(ModelState.IsValid)
             //{
-                bool ans = false;
-                Console.WriteLine(model.CountryID);
-                Country_Base_DAL dal = new Country_Base_DAL();
-                if (model.CountryID != 0)
-                {
-                    ans = dal.PR_LOC_Country_Update(model);
-                    TempData["message"] = "Record Updated Successfully";
-                }
-                else
-                {
-                    ans = dal.PR_LOC_Country_Insert(model);
-                    TempData["message"] = "Record Inserted Successfully";
-                }
-                if (ans)
-                {
-                    return RedirectToAction("CountryList");
-                }
-                else
-                {
-                    return RedirectToAction("CountryList");
-                }
+            bool ans = false;
+            Console.WriteLine(model.CountryID);
+            Country_Base_DAL dal = new Country_Base_DAL();
+            if (model.CountryID != 0)
+            {
+                ans = dal.PR_LOC_Country_Update(model);
+                TempData["message"] = "Record Updated Successfully";
+            }
+            else
+            {
+                ans = dal.PR_LOC_Country_Insert(model);
+                TempData["message"] = "Record Inserted Successfully";
+            }
+            if (ans)
+            {
+                return RedirectToAction("CountryList");
+            }
+            else
+            {
+                return RedirectToAction("CountryList");
+            }
             //}
             //else
             //{
             //    return View("LOC_CountryAddEdit");
             //}
-           
+
         }
         #endregion
 

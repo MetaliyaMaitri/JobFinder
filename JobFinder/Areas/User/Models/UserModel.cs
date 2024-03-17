@@ -2,29 +2,17 @@
 {
     public class UserModel
     {
-        public int UserID { get; set; }    
+        public int userid { get; set; }
 
-        public string UserName { get; set; } 
+        public string user_name { get; set; }
 
-        public string Password { get; set; }
+        public string user_email { get; set; }
 
-        public string Email { get; set; }
+        public string user_password { get; set; }
 
-        public string Mobile { get; set; }
+        public string user_role { get; set; }
 
-        public int CityID { get; set; }
 
-        public string CityName { get; set; }
-
-        public  string LinkedInProfile {  get; set; }
-
-        public string Address { get; set; }
-
-        public  string Resume { get; set; }
-
-        public DateTime CreationDate { get; set; }
-
-        public DateTime Modified { get; set;}
 
 
     }

@@ -11,7 +11,7 @@
 
 
 
-            <h5 class="card-title">User</h5>
+            <h5 class="card-title" style="color : #4B49AC">User</h5>
             @*  <form method="post" asp-controller="Company" asp-action="SaveForAddEdit" asp-area="Company" class="d-flex w-80" role="search"> *@
 
             @*  </form> *@
@@ -29,6 +29,7 @@
                             <th scope="col" class="text-center">UserName</th>
                             <th scope="col" class="text-center">Password</th>
                             <th scope="col" class="text-center">Email</th>
+                            <th scope="col" class="text-center">UserRole</th>
                            
 
 
@@ -38,10 +39,11 @@
                     {
                         <tbody>
                             <tr>
-                                <td class="text-center">@row.UserID </td>
-                                <td class="text-center">@row.UserName </td>
-                                <td class="text-center">@row.Password </td>
-                                <td class="text-center">@row.Email</td>
+                                <td class="text-center">@row.userid </td>
+                                <td class="text-center">@row.user_name </td>
+                                <td class="text-center">@row.user_password </td>
+                                <td class="text-center">@row.user_email</td>
+                                <td class="text-center">@row.user_role</td>
                                 
 
 

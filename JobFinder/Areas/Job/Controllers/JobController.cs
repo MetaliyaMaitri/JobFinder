@@ -1,14 +1,13 @@
-﻿using JobFinder.Areas.City.Models;
+﻿using ClosedXML.Excel;
 using JobFinder.Areas.Company.Models;
 using JobFinder.Areas.Job.Models;
-using JobFinder.Areas.State.Models;
 using JobFinder.DAL;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
 using System.Data.Common;
-using JobFinder.Areas.Country.Models;
+using System.Data.SqlClient;
 
 namespace JobFinder.Areas.Job.Controllers
 {
@@ -66,7 +65,7 @@ namespace JobFinder.Areas.Job.Controllers
                         job.EmploymentType = row["EmploymentType"].ToString();
                         job.ExperienceLeval = row["ExperienceLeval"].ToString();
                         job.EducationLeval = row["EducationLeval"].ToString();
-                       
+
                         job.CreatedDate = Convert.ToDateTime(row["CreatedDate"]);
                         job.ModifiedDate = Convert.ToDateTime(row["ModifiedDate"]);
                         // Set other properties here
@@ -131,36 +130,36 @@ namespace JobFinder.Areas.Job.Controllers
 
             //if (ModelState.IsValid)
             //{
-               
-                bool ans = false;
-                Console.WriteLine(model.JobID);
-                Job_Base_DAL dal = new Job_Base_DAL();
-                if (model.JobID != 0)
-                {
-                    ans = dal.PR_Job_Update(model);
-                    TempData["message"] = "Record Updated Successfully";
 
-                }
-                else
-                {
-                    ans = dal.PR_Job_Insert(model);
-                    TempData["message"] = "Record Inserted Successfully";
-                }
-                if (ans)
-                {
-                    return RedirectToAction("JobList");
+            bool ans = false;
+            Console.WriteLine(model.JobID);
+            Job_Base_DAL dal = new Job_Base_DAL();
+            if (model.JobID != 0)
+            {
+                ans = dal.PR_Job_Update(model);
+                TempData["message"] = "Record Updated Successfully";
 
-                }
-                else
-                {
-                    return RedirectToAction("JobList");
-                }
+            }
+            else
+            {
+                ans = dal.PR_Job_Insert(model);
+                TempData["message"] = "Record Inserted Successfully";
+            }
+            if (ans)
+            {
+                return RedirectToAction("JobList");
+
+            }
+            else
+            {
+                return RedirectToAction("JobList");
+            }
             //}
             //else
             //{
             //    return View("JobAddEdit");
             //}
-           
+
         }
         #endregion
 
@@ -208,7 +207,95 @@ namespace JobFinder.Areas.Job.Controllers
 
         #endregion
 
-       
+        #region Selectallfor excel
+        public List<JobModel> GetJobModels()
+        {
+            List<JobModel> jobModels = new List<JobModel>();
+            string myconnStr = this.Configuration.GetConnectionString("myConnectionString");
+            SqlConnection connection = new SqlConnection(myconnStr);
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "PR_Job_SelectAll";
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    JobModel jobModel = new JobModel
+                    {
+                        JobID = (int)reader["JobID"],
+                        JobType = reader["JobType"].ToString(),
+                        CompanyName = reader["CompanyName"].ToString(),
+                        Location = reader["Location"].ToString(),
+                        Requirements = reader["Requirements"].ToString(),
+                        Salary = reader["Salary"].ToString(),
+                        EmploymentType = reader["EmploymentType"].ToString(),
+                        ExperienceLeval = reader["ExperienceLeval"].ToString(),
+                        EducationLeval = reader["EducationLeval"].ToString(),
+                        CreatedDate = Convert.ToDateTime(reader["CreatedDate"]),
+                        ModifiedDate = Convert.ToDateTime(reader["ModifiedDate"]),
+
+
+
+                    };
+                    jobModels.Add(jobModel);
+                }
+                return jobModels;
+            }
+        }
+        public IActionResult ExportJobToExcel()
+        {
+
+            List<JobModel> jobModels = GetJobModels();
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("JobModel");
+                // Add headers
+                worksheet.Cell(1, 1).Value = "JobID";
+                worksheet.Cell(1, 2).Value = "JobType";
+                worksheet.Cell(1, 3).Value = "CompanyName";
+                worksheet.Cell(1, 4).Value = "Location";
+                worksheet.Cell(1, 5).Value = "Requirements";
+                worksheet.Cell(1, 6).Value = "Salary";
+                worksheet.Cell(1, 7).Value = "EmploymentType";
+                worksheet.Cell(1, 8).Value = "ExperienceLeval";
+                worksheet.Cell(1, 9).Value = "EducationLeval";
+                worksheet.Cell(1, 10).Value = "CreatedDate";
+                worksheet.Cell(1, 11).Value = "ModifiedDate";
+
+                // Add data
+                int row = 2;
+                foreach (var jobModel in jobModels)
+                {
+                    worksheet.Cell(row, 1).Value = jobModel.JobID;
+                    worksheet.Cell(row, 2).Value = jobModel.JobType;
+                    worksheet.Cell(row, 3).Value = jobModel.CompanyName;
+                    worksheet.Cell(row, 4).Value = jobModel.Location;
+                    worksheet.Cell(row, 5).Value = jobModel.Requirements;
+                    worksheet.Cell(row, 6).Value = jobModel.Salary;
+                    worksheet.Cell(row, 7).Value = jobModel.EmploymentType;
+                    worksheet.Cell(row, 8).Value = jobModel.ExperienceLeval;
+                    worksheet.Cell(row, 9).Value = jobModel.EducationLeval;
+                    worksheet.Cell(row, 10).Value = jobModel.CreatedDate.ToString("yyyy-MM-dd");
+                    worksheet.Cell(row, 11).Value = jobModel.ModifiedDate.ToString("yyyy-MM-dd");
+
+
+                    // Add other properties...
+                    row++;
+                }
+                // Set content type and filename
+                var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                var fileName = "StudentData.xlsx";
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, contentType, fileName);
+                }
+            }
+        }
+        #endregion
+
         #region #Cancel
         public IActionResult Cancel()
         {
@@ -216,6 +303,6 @@ namespace JobFinder.Areas.Job.Controllers
         }
         #endregion
 
-       
+
     }
 }
