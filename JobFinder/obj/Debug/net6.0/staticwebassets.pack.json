@@ -605,6 +605,10 @@
       "PackagePath": "staticwebassets\\AreaLayout\\images\\faces\\face9.jpg"
     },
     {
+      "Id": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\AreaLayout\\images\\faces\\logo.jpeg",
+      "PackagePath": "staticwebassets\\AreaLayout\\images\\faces\\logo.jpeg"
+    },
+    {
       "Id": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\AreaLayout\\images\\favicon.png",
       "PackagePath": "staticwebassets\\AreaLayout\\images\\favicon.png"
     },
@@ -7031,6 +7035,10 @@
     {
       "Id": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\Company\\Intel.png",
       "PackagePath": "staticwebassets\\Company\\Intel.png"
+    },
+    {
+      "Id": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\Company\\Meta.png",
+      "PackagePath": "staticwebassets\\Company\\Meta.png"
     },
     {
       "Id": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\Company\\Microsoft.png",

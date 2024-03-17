@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <label>Size</label>
-                            <input class="form-control form-control-rounded" placeholder="Size" asp-for="Size" required="required">
+                            <input type="number" class="form-control form-control-rounded" placeholder="Size" asp-for="Size" required="required" min="1" max="100">
                             <span asp-validation-for="Size" class="text-danger"></span>
                         </div>
                        

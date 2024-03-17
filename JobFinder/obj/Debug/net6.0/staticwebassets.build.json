@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Hclp06Nw2JTdHZiJPIYJoAMDx3LSbT1ZYyAEyNBnsgQ=",
+  "Hash": "n8W3Gq4WiUTk9SqE9EohBucHRX5WpuOysBPPx1bqMGw=",
   "Source": "JobFinder",
   "BasePath": "_content/JobFinder",
   "Mode": "Default",
@@ -2903,6 +2903,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\AreaLayout\\images\\faces\\face9.jpg"
+    },
+    {
+      "Identity": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\AreaLayout\\images\\faces\\logo.jpeg",
+      "SourceId": "JobFinder",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\",
+      "BasePath": "_content/JobFinder",
+      "RelativePath": "AreaLayout/images/faces/logo.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\AreaLayout\\images\\faces\\logo.jpeg"
     },
     {
       "Identity": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\AreaLayout\\images\\favicon.png",
@@ -36932,6 +36951,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Company\\job_logo_5.jpg"
+    },
+    {
+      "Identity": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\Company\\Meta.png",
+      "SourceId": "JobFinder",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\",
+      "BasePath": "_content/JobFinder",
+      "RelativePath": "Company/Meta.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Company\\Meta.png"
     },
     {
       "Identity": "D:\\SEM6\\JobFinder\\JobFinder\\wwwroot\\Company\\Microsoft.png",

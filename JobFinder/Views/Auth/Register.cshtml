@@ -1,36 +1,43 @@
 ﻿@{
     Layout = "_UserLoginLayout";
 }
-@model JobFinder.Models.AuthModel;
+@model JobFinder.Models.Register;
 <!-- Sign up form -->
 <section class="signup">
     <div class="container">
         <div class="signup-content">
             <div class="signup-form">
                 <h2 class="form-title">Sign up</h2>
-                <form method="POST" class="register-form" id="register-form" asp-controller="Auth" asp-action="RegisterSaveForAddEdit">
+
+                <form method="POST" class="register-form" id="register-form" asp-controller="Auth" asp-action="SE_Register">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
                         <label for="Username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                        <input type="text" asp-for="UserName" name="UserName" id="UserName" placeholder="Your Name" />
+                        <input type="text" asp-for="UserName" name="UserName" id="UserName" placeholder="Your Name" required="required" />
+                        <span asp-validation-for="UserName"/>
                     </div>
                     <div class="form-group">
                         <label for="UserEmail"><i class="zmdi zmdi-email"></i></label>
-                        <input type="email" asp-for="UserEmail" name="UserEmail" id="UserEmail" placeholder="Your Email" />
+                        <input type="email" asp-for="UserEmail" name="UserEmail" id="UserEmail" placeholder="Your Email" required="required" />
+                        <span asp-validation-for="UserEmail"/>
                     </div>
                     <div class="form-group">
                         <label for="UserPassword"><i class="zmdi zmdi-lock"></i></label>
-                        <input type="password" asp-for="UserPassword" name="UserPassword" id="UserPassword" placeholder="Password" />
+                        <input type="password" asp-for="UserPassword" name="UserPassword" id="UserPassword" placeholder="Password" required="required" />
+                        <span asp-validation-for="UserPassword"/>
                     </div>
                     <div class="form-group">
                         <label for="UserPassword"><i class="zmdi zmdi-lock-outline"></i></label>
-                        <input type="password" asp-for="UserPassword" name="UserPassword" id="UserPassword" placeholder="Repeat your password" />
+                        <input type="password" asp-for="UserPassword" name="UserPassword" id="UserPassword" placeholder="Repeat your password" required="required" />
+                        <span asp-validation-for="UserPassword"/>
                     </div>
+                   
                     <div class="form-group">
                         <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                         <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                     </div>
                     <div class="form-group form-button">
-                        <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                        <input  type="submit" name="signup" id="signup" class="form-submit" value="Register" />
                     </div>
                 </form>
             </div>

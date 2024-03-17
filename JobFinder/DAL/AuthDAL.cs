@@ -30,7 +30,7 @@ namespace JobFinder.DAL
             return user;
         }
         #region InsertUser
-        public bool InsertUser(AuthModel model)
+        public bool InsertUser(Register model)
 
         {
             try
@@ -41,6 +41,7 @@ namespace JobFinder.DAL
                 db.AddInParameter(cmd, "@UserName", SqlDbType.VarChar, model.UserName);
                 db.AddInParameter(cmd, "@UserEmail", SqlDbType.VarChar, model.UserEmail);
                 db.AddInParameter(cmd, "@UserPassword", SqlDbType.VarChar, model.UserPassword);
+                db.AddInParameter(cmd, "@UserRole", SqlDbType.VarChar, "client");
 
 
 
@@ -57,14 +58,14 @@ namespace JobFinder.DAL
         #endregion
 
         #region JobSelectByID
-        public AuthModel RegisterSelectByPk(int UserId, string UserRole)
+        public Register RegisterSelectByPk(int UserId, string UserRole)
         {
             SqlDatabase db = new SqlDatabase(constring);
             DbCommand cmd = db.GetStoredProcCommand("SelectUserByPKAndRole");
             db.AddInParameter(cmd, "@UserId", SqlDbType.Int, UserId);
             db.AddInParameter(cmd, "@user_role", SqlDbType.VarChar, UserRole);
 
-            AuthModel model = new AuthModel();
+            Register model = new Register();
             using (IDataReader reader = db.ExecuteReader(cmd))
             {
                 while (reader.Read())
@@ -82,7 +83,7 @@ namespace JobFinder.DAL
         #endregion
 
         #region UserUpdate
-        public bool UpdateUser(AuthModel model)
+        public bool UpdateUser(Register model)
         {
             try
             {
@@ -92,6 +93,7 @@ namespace JobFinder.DAL
                 db.AddInParameter(cmd, "@UserName", SqlDbType.VarChar, model.UserName);
                 db.AddInParameter(cmd, "@UserEmail", SqlDbType.VarChar, model.UserEmail);
                 db.AddInParameter(cmd, "@UserPassword", SqlDbType.VarChar, model.UserPassword);
+
 
                 int noOfRows = db.ExecuteNonQuery(cmd);
                 if (noOfRows > 0) { return true; }
@@ -104,6 +106,10 @@ namespace JobFinder.DAL
             }
         }
         #endregion
+
+
+
+
 
     }
 }

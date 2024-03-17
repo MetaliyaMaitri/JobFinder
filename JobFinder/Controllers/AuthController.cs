@@ -7,6 +7,10 @@ namespace JobFinder.Controllers
     public class AuthController : Controller
     {
 
+        private readonly AuthDAL _auth;
+
+
+
         #region LoginView
         public IActionResult Login()
         {
@@ -49,44 +53,27 @@ namespace JobFinder.Controllers
 
         #endregion
 
-        public IActionResult Register(int UserId, string UserRole)
+        public IActionResult Register()
         {
-            AuthDAL dal = new AuthDAL();
-            AuthModel model = dal.RegisterSelectByPk(UserId, UserRole);
-            return View(model);
+
+            return View();
         }
 
+
         #region SaveForAddEdit
-        public IActionResult RegisterSaveForAddEdit(AuthModel model)
-
+        public IActionResult SE_Register(Register model)
         {
-
-
-
-            bool ans = false;
-
-            AuthDAL dal = new AuthDAL();
-            if (model.UserId != 0)
+            if (ModelState.IsValid)
             {
-                ans = dal.UpdateUser(model);
-                TempData["message"] = "Record Updated Successfully";
-
-            }
-            else
-            {
-                ans = dal.InsertUser(model);
-                TempData["message"] = "Record Inserted Successfully";
-            }
-            if (ans)
-            {
+                AuthDAL DAL = new AuthDAL();
+                DAL.InsertUser(model);
+                TempData["Login"] = "Accountry Created Login To Continue....";
                 return RedirectToAction("Index", "Home");
-
             }
             else
             {
                 return RedirectToAction("Index", "Home");
             }
-
 
         }
         #endregion
